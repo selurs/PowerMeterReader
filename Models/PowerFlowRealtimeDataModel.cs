@@ -1,8 +1,8 @@
 namespace PowerMeterReader.Models
 {
-    public class RealtimeDataModel
+    public class PowerFlowRealtimeDataModel
     {
-        public RealtimeDataBody Body { get; set; }
+        public PowerFlowRealtimeDataBody Body { get; set; }
         public CommonResponseHeader Head { get; set; }
     }
 }

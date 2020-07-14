@@ -26,6 +26,34 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "publish arm",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-r",
+                "linux-arm",
+                "${workspaceFolder}/PowerMeterReader.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "deploy arm",
+            "type": "shell",
+            "command": "scp -v -r .\\* pi@raspberrypi:/home/pi/Desktop/PowerMeterReader",
+            "presentation": {
+              "reveal": "always",
+              "panel": "new"
+            }          
+        },
+        {
+            "label": "cycle",
+            "dependsOrder": "sequence",
+            "dependsOn": ["build", "publish arm", "deploy arm"]
+        },
+        {
             "label": "watch",
             "command": "dotnet",
             "type": "process",

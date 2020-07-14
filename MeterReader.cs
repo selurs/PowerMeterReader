@@ -15,18 +15,28 @@ namespace PowerMeterReader
             _ipAddress = ipAddress;
         }
 
-        public async Task<RealtimeDataModel> Read(string scope)
+        public async Task<RealtimeDataModel> ReadInverterData(string scope)
         {
-            using (var response = await _client.GetAsync($"http://{_ipAddress}{Definitions.GET_DATA_METHOD}?{Definitions.GET_DATA_SCOPE_PARAM}={scope}"))
+            return await ReadData<RealtimeDataModel>($"{Definitions.GET_INVERTER_DATA_METHOD}?{Definitions.GET_DATA_SCOPE_PARAM}={scope}");
+        }
+
+        public async Task<PowerFlowRealtimeDataModel> ReadPowerFlowData()
+        {
+            return await ReadData<PowerFlowRealtimeDataModel>(Definitions.GET_POWER_FLOW_DATA_METHOD);
+        }
+
+        private async Task<T> ReadData<T>(string uri)
+        {
+            using (var response = await _client.GetAsync($"http://{_ipAddress}{uri}"))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     var apiResponse = await response.Content.ReadAsStreamAsync();
-                    var realtimeData = await JsonSerializer.DeserializeAsync<RealtimeDataModel>(apiResponse);
+                    var realtimeData = await JsonSerializer.DeserializeAsync<T>(apiResponse);
                     return realtimeData;
                 }
 
-                return null;
+                return default(T);
             }
         }
     }

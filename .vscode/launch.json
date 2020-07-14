@@ -22,6 +22,44 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
+        },        
+        {
+            "name": ".NET Core Launch (remote console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "cycle",
+            "program": "/home/pi/dotnet/dotnet",
+            "args": ["/home/pi/Desktop/PowerMeterReader/PowerMeterReader.dll","-a","192.168.1.30"],
+            "cwd": "/home/pi/Desktop/PowerMeterReader",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "pi@raspberrypi"
+                ],
+                "debuggerPath": "/home/pi/vsdbg/vsdbg"
+            }
+        },,        
+        {
+            "name": ".NET Core Launch (remote console - no build)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "",
+            "program": "/home/pi/dotnet/dotnet",
+            "args": ["/home/pi/Desktop/PowerMeterReader/PowerMeterReader.dll","-a","192.168.1.30"],
+            "cwd": "/home/pi/Desktop/PowerMeterReader",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "pi@raspberrypi"
+                ],
+                "debuggerPath": "/home/pi/vsdbg/vsdbg"
+            }
         }
     ]
 }
