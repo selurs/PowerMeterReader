@@ -41,7 +41,7 @@
                 ],
                 "debuggerPath": "/home/pi/vsdbg/vsdbg"
             }
-        },,        
+        },
         {
             "name": ".NET Core Launch (remote console - no build)",
             "type": "coreclr",
